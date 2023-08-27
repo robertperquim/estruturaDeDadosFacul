@@ -182,7 +182,7 @@ int main()
             break;
 
         case 3:
-
+            printf("\nEm qual lista deseja pesquisar");
             break;
 
         case 4:
