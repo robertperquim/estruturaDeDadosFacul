@@ -152,6 +152,48 @@ void insereNoIncio(No **ponteiroInicio, int valor)
     }
 }
 
+void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
+{
+
+    No *auxilar = *ponteiroInicio, *novoNo, *ponteiroAnterior, *ponteiroAtual;
+
+    if (verificaListaVaza(auxilar))
+    {
+        return;
+    }
+    else
+    {
+        if (auxilar->valor == valorAntes)
+        {
+
+            insereNoIncio(ponteiroInicio, valor);
+        }
+
+        while (auxilar->proximo != NULL)
+        {
+            if (auxilar->proximo->valor == valorAntes)
+            {
+                novoNo = (No *)malloc(sizeof(No));
+                if (novoNo == NULL)
+                {
+                    printf("Erro ao alocar memoria.\n");
+                }
+                else
+                {
+                    ponteiroAnterior = auxilar;
+                    ponteiroAtual = auxilar->proximo;
+
+                    novoNo->valor = valor;
+                    ponteiroAnterior->proximo = novoNo;
+                    novoNo->proximo = ponteiroAtual;
+                }
+
+                return;
+            }
+            auxilar = auxilar->proximo;
+        }
+    }
+}
 void imprime(No *ponteiroInicio)
 {
 
@@ -175,7 +217,7 @@ int menu()
     printf("\n3 - Excluir no final: ");
     printf("\n4 - Excluir no inicio: ");
     printf("\n5 - Buscar valor");
-    printf("\n6 - Inserir antes de>>> ");
+    printf("\n6 - Inserir antes do k ");
     printf("\n7 - Imprimir  ");
     printf("\n - Sair ");
     printf("\nEscolha uma opcao: ");
@@ -192,7 +234,7 @@ int menu()
 
 int main()
 {
-    int loop = 0, valor;
+    int loop = 0, valor, valorAntes;
     No *ponteiroInicio;
     ponteiroInicio = NULL;
 
@@ -230,9 +272,16 @@ int main()
             printf("\nInforme o valor que deseja buscar na lista\n\n");
             scanf("%d", &valor);
             buscaValor(&ponteiroInicio, valor);
+
             break;
         case 6:
-            /* code */
+            printf("\nInserir antes do K !!!!!!\n\n");
+            printf("\nInforme o valor que deseja inserir: \n\n");
+            scanf("%d", &valor);
+            printf("\nInforme o valor em que deseja inserir antes: \n\n");
+            scanf("%d", &valorAntes);
+            insereAntesDoK(&ponteiroInicio, valor, valorAntes);
+
             break;
         case 7:
             imprime(ponteiroInicio);
