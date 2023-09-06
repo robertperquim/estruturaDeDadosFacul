@@ -171,6 +171,7 @@ void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
 
         while (auxilar->proximo != NULL)
         {
+
             if (auxilar->proximo->valor == valorAntes)
             {
                 novoNo = (No *)malloc(sizeof(No));
@@ -194,6 +195,47 @@ void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
         }
     }
 }
+
+void removeAntesDoK(No **ponteiroInicio, int valorAntes)
+{
+
+    No *auxilar = *ponteiroInicio, *ponteiroAnterior, *ponteiroAtual, *ponteiroRemover;
+
+    if (verificaListaVaza(auxilar))
+    {
+        return;
+    }
+    else
+    {
+        if (auxilar->valor == valorAntes)
+        {
+
+            printf("\nNão e possivel remover antes desse valor pois ele e o priemeiro da lista.\n");
+        }
+        if (auxilar->proximo->valor == valorAntes)
+        {
+            removeIicio(ponteiroInicio);
+            return;
+        }
+
+        while (auxilar->proximo->proximo != NULL)
+        {
+            if (auxilar->proximo->proximo->valor == valorAntes)
+            {
+
+                ponteiroAnterior = auxilar;
+                ponteiroRemover = auxilar->proximo;
+                ponteiroAtual = auxilar->proximo->proximo;
+                ponteiroAnterior->proximo = ponteiroAtual;
+                ponteiroRemover = NULL;
+                free(ponteiroRemover);
+                return;
+            }
+            auxilar = auxilar->proximo;
+        }
+    }
+}
+
 void imprime(No *ponteiroInicio)
 {
 
@@ -217,13 +259,14 @@ int menu()
     printf("\n3 - Excluir no final: ");
     printf("\n4 - Excluir no inicio: ");
     printf("\n5 - Buscar valor");
-    printf("\n6 - Inserir antes do k ");
-    printf("\n7 - Imprimir  ");
-    printf("\n - Sair ");
+    printf("\n6 - Inserir antes do k (insere no meio) ");
+    printf("\n7 - Remove antes do k (remove no meio) ");
+    printf("\n8 - Imprimir  ");
+    printf("\n9- Sair ");
     printf("\nEscolha uma opcao: ");
     scanf("%d", &opcao);
 
-    while (opcao < 1 && opcao > 8)
+    while (opcao < 1 && opcao > 9)
     {
         printf("\nEscolha uma opcao valida: ");
         scanf("%d", &opcao);
@@ -238,7 +281,7 @@ int main()
     No *ponteiroInicio;
     ponteiroInicio = NULL;
 
-    while (loop != 8)
+    while (loop != 9)
     {
         switch (menu())
         {
@@ -284,11 +327,18 @@ int main()
 
             break;
         case 7:
+            printf("\nRemove antes do K !!!!!!\n\n");
+            printf("\nInforme o valor em que deseja remover antes: \n\n");
+            scanf("%d", &valorAntes);
+            removeAntesDoK(&ponteiroInicio, valorAntes);
+
+            break;
+        case 8:
             imprime(ponteiroInicio);
             break;
 
         default:
-            loop = 8;
+            loop = 9;
             break;
         }
     }
