@@ -141,6 +141,8 @@ void search(Node *startPointer, int value)
     {
         while (auxPointer != NULL && auxValue != value)
         {
+            printf("\n o valor do auxPointer %p", auxPointer);
+            printf("\n o valor do auxValue %d", auxValue);
             if (auxPointer->value == value)
             {
                 auxValue = auxPointer->value;

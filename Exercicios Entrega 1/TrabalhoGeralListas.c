@@ -20,6 +20,38 @@ bool verificaListaVaza(No *ponteroInicio)
     return false;
 }
 
+void buscaValor(No **ponteiroInicio, int valor)
+{
+    No *auxilar = *ponteiroInicio;
+    int valorEncontrado, *enderecoEncontrado;
+
+    if (verificaListaVaza(auxilar))
+    {
+        return;
+    }
+    else
+    {
+        while (auxilar != NULL && valorEncontrado != valor)
+        {
+            if (auxilar->valor == valor)
+            {
+                valorEncontrado = auxilar->valor;
+                enderecoEncontrado = auxilar;
+            }
+            auxilar = auxilar->proximo;
+        }
+
+        if (valorEncontrado == valor)
+        {
+            printf("\nO valor %d foi encotrado na posicao %p\n", valorEncontrado, enderecoEncontrado);
+        }
+        else
+        {
+            printf("\nO valor não foi encontrado na lista\n");
+        }
+    }
+}
+
 void removeIicio(No **ponteiroInicio)
 {
 
@@ -142,7 +174,7 @@ int menu()
     printf("\n2 - Inserir no inicio da lista: ");
     printf("\n3 - Excluir no final: ");
     printf("\n4 - Excluir no inicio: ");
-    printf("\n5 - Buscar valor  ");
+    printf("\n5 - Buscar valor");
     printf("\n6 - Inserir antes de>>> ");
     printf("\n7 - Imprimir  ");
     printf("\n - Sair ");
@@ -184,16 +216,20 @@ int main()
             break;
         case 3:
 
-            printf("\nRemove Fim!!!!!!");
+            printf("\nRemove FIm!!!!!!\n\n");
             removeFim(&ponteiroInicio);
 
             break;
         case 4:
-            printf("\nRemove Fim!!!!!!");
+            printf("\nRemove Inicio!!!!!!\n\n");
             removeIicio(&ponteiroInicio);
             break;
         case 5:
-            /* code */
+
+            printf("\nBusca valor!!!!!!\n\n");
+            printf("\nInforme o valor que deseja buscar na lista\n\n");
+            scanf("%d", &valor);
+            buscaValor(&ponteiroInicio, valor);
             break;
         case 6:
             /* code */
