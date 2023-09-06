@@ -130,9 +130,7 @@ int main()
     NO_LISTA_RAND *listaRand = NULL;
     NO_LISTA_ORDER *listaOrder = NULL;
 
-    
-
-    int quantNum, controle = 0, dado;
+        int quantNum, controle = 0, dado;
 
     srand(time(NULL));
 
@@ -185,7 +183,7 @@ int main()
 
         case 3:
             printf("\nEm qual lista deseja pesquisar");
-            scanf("%d," &dado);
+            scanf("%d", &dado);
             break;
 
         case 4:
