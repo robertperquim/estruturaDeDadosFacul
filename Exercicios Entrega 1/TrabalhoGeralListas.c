@@ -22,23 +22,23 @@ bool verificaListaVaza(No *ponteroInicio)
 
 void buscaValor(No **ponteiroInicio, int valor)
 {
-    No *auxilar = *ponteiroInicio;
+    No *auxiliar = *ponteiroInicio;
     int valorEncontrado, *enderecoEncontrado;
 
-    if (verificaListaVaza(auxilar))
+    if (verificaListaVaza(auxiliar))
     {
         return;
     }
     else
     {
-        while (auxilar != NULL && valorEncontrado != valor)
+        while (auxiliar != NULL && valorEncontrado != valor)
         {
-            if (auxilar->valor == valor)
+            if (auxiliar->valor == valor)
             {
-                valorEncontrado = auxilar->valor;
-                enderecoEncontrado = auxilar;
+                valorEncontrado = auxiliar->valor;
+                enderecoEncontrado = auxiliar;
             }
-            auxilar = auxilar->proximo;
+            auxiliar = auxiliar->proximo;
         }
 
         if (valorEncontrado == valor)
@@ -55,53 +55,53 @@ void buscaValor(No **ponteiroInicio, int valor)
 void removeIicio(No **ponteiroInicio)
 {
 
-    No *auxilar = *ponteiroInicio;
+    No *auxiliar = *ponteiroInicio;
 
-    if (verificaListaVaza(auxilar))
+    if (verificaListaVaza(auxiliar))
     {
 
         return;
     }
     else
     {
-        if (auxilar->proximo == NULL)
+        if (auxiliar->proximo == NULL)
         {
             *ponteiroInicio = NULL;
-            free(auxilar);
+            free(auxiliar);
         }
         else
         {
-            *ponteiroInicio = auxilar->proximo;
-            free(auxilar);
+            *ponteiroInicio = auxiliar->proximo;
+            free(auxiliar);
         }
     }
 }
 
 void removeFim(No **ponteiroInicio)
 {
-    No *auxilar = *ponteiroInicio;
+    No *auxiliar = *ponteiroInicio;
 
-    if (verificaListaVaza(auxilar))
+    if (verificaListaVaza(auxiliar))
     {
 
         return;
     }
     else
     {
-        if (auxilar->proximo == NULL)
+        if (auxiliar->proximo == NULL)
         {
             *ponteiroInicio = NULL;
-            free(auxilar);
+            free(auxiliar);
         }
         else
         {
-            while (auxilar->proximo->proximo != NULL)
+            while (auxiliar->proximo->proximo != NULL)
             {
-                auxilar = auxilar->proximo;
+                auxiliar = auxiliar->proximo;
             }
 
-            auxilar->proximo = NULL;
-            free(auxilar->proximo);
+            auxiliar->proximo = NULL;
+            free(auxiliar->proximo);
         }
     }
 }
@@ -155,24 +155,24 @@ void insereNoIncio(No **ponteiroInicio, int valor)
 void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
 {
 
-    No *auxilar = *ponteiroInicio, *novoNo, *ponteiroAnterior, *ponteiroAtual;
+    No *auxiliar = *ponteiroInicio, *novoNo, *ponteiroAnterior, *ponteiroAtual;
 
-    if (verificaListaVaza(auxilar))
+    if (verificaListaVaza(auxiliar))
     {
         return;
     }
     else
     {
-        if (auxilar->valor == valorAntes)
+        if (auxiliar->valor == valorAntes)
         {
 
             insereNoIncio(ponteiroInicio, valor);
         }
 
-        while (auxilar->proximo != NULL)
+        while (auxiliar->proximo != NULL)
         {
 
-            if (auxilar->proximo->valor == valorAntes)
+            if (auxiliar->proximo->valor == valorAntes)
             {
                 novoNo = (No *)malloc(sizeof(No));
                 if (novoNo == NULL)
@@ -181,8 +181,8 @@ void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
                 }
                 else
                 {
-                    ponteiroAnterior = auxilar;
-                    ponteiroAtual = auxilar->proximo;
+                    ponteiroAnterior = auxiliar;
+                    ponteiroAtual = auxiliar->proximo;
 
                     novoNo->valor = valor;
                     ponteiroAnterior->proximo = novoNo;
@@ -191,7 +191,7 @@ void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
 
                 return;
             }
-            auxilar = auxilar->proximo;
+            auxiliar = auxiliar->proximo;
         }
     }
 }
@@ -199,39 +199,39 @@ void insereAntesDoK(No **ponteiroInicio, int valor, int valorAntes)
 void removeAntesDoK(No **ponteiroInicio, int valorAntes)
 {
 
-    No *auxilar = *ponteiroInicio, *ponteiroAnterior, *ponteiroAtual, *ponteiroRemover;
+    No *auxiliar = *ponteiroInicio, *ponteiroAnterior, *ponteiroAtual, *ponteiroRemover;
 
-    if (verificaListaVaza(auxilar))
+    if (verificaListaVaza(auxiliar))
     {
         return;
     }
     else
     {
-        if (auxilar->valor == valorAntes)
+        if (auxiliar->valor == valorAntes)
         {
 
             printf("\nNão e possivel remover antes desse valor pois ele e o priemeiro da lista.\n");
         }
-        if (auxilar->proximo->valor == valorAntes)
+        if (auxiliar->proximo->valor == valorAntes)
         {
             removeIicio(ponteiroInicio);
             return;
         }
 
-        while (auxilar->proximo->proximo != NULL)
+        while (auxiliar->proximo->proximo != NULL)
         {
-            if (auxilar->proximo->proximo->valor == valorAntes)
+            if (auxiliar->proximo->proximo->valor == valorAntes)
             {
 
-                ponteiroAnterior = auxilar;
-                ponteiroRemover = auxilar->proximo;
-                ponteiroAtual = auxilar->proximo->proximo;
+                ponteiroAnterior = auxiliar;
+                ponteiroRemover = auxiliar->proximo;
+                ponteiroAtual = auxiliar->proximo->proximo;
                 ponteiroAnterior->proximo = ponteiroAtual;
                 ponteiroRemover = NULL;
                 free(ponteiroRemover);
                 return;
             }
-            auxilar = auxilar->proximo;
+            auxiliar = auxiliar->proximo;
         }
     }
 }
@@ -268,18 +268,59 @@ void insereOrdenado(No **ponteiroInicio, int valor)
     }
 }
 
+void listaCircular(No **ponteiroInicio)
+{
+    No *auxiliar = *ponteiroInicio;
+
+    if (verificaListaVaza(auxiliar))
+    {
+        return;
+    }
+    else
+    {
+        if (auxiliar->proximo != NULL)
+        {
+            while (auxiliar->proximo != NULL)
+            {
+                auxiliar = auxiliar->proximo;
+            }
+
+            auxiliar->proximo = *ponteiroInicio;
+
+            printf("\nSua lista agora e circular");
+        }
+        else
+        {
+            printf("\nNao e possivel tornar uma lista com apenas um elemento circular");
+        }
+    }
+}
+
 void imprime(No *ponteiroInicio)
 {
+    No *auxiliar = ponteiroInicio;
 
-    printf("Valor\tEndereco\tProximo");
-
-    while (ponteiroInicio)
+    if (verificaListaVaza(auxiliar))
     {
-        printf("\n%d\t%p\t%p", ponteiroInicio->valor, ponteiroInicio, ponteiroInicio->proximo);
-        ponteiroInicio = ponteiroInicio->proximo;
+        return;
     }
+    else
+    {
+        printf("Valor\tEndereco\tProximo");
 
-    printf("\n\n\n");
+        while (auxiliar)
+        {
+            printf("\n%d\t%p\t%p", auxiliar->valor, auxiliar, auxiliar->proximo);
+
+            if (auxiliar->proximo == ponteiroInicio)
+            {
+                return;
+            }
+            auxiliar = auxiliar->proximo;
+        }
+
+        printf("\n\n\n");
+    }
 }
 
 int menu()
@@ -321,14 +362,14 @@ int main()
         {
         case 1:
             printf("\nInserir no final!!!!!!");
-            printf("\nInfomre o numero que deseja inserir::::::");
+            printf("\nInfomre o numero que deseja inserir:");
             scanf("%d", &valor);
             insereNoFim(&ponteiroInicio, valor);
             break;
         case 2:
 
             printf("\nInserir no Iniciol!!!!!!");
-            printf("\nInfomre o numero que deseja inserir::::::");
+            printf("\nInfomre o numero que deseja inserir::");
             scanf("%d", &valor);
             insereNoIncio(&ponteiroInicio, valor);
 
@@ -345,24 +386,24 @@ int main()
             break;
         case 5:
 
-            printf("\nBusca valor!!!!!!\n\n");
-            printf("\nInforme o valor que deseja buscar na lista\n\n");
+            printf("\nBusca valor!!!!!!");
+            printf("\nInforme o valor que deseja buscar na lista");
             scanf("%d", &valor);
             buscaValor(&ponteiroInicio, valor);
 
             break;
         case 6:
-            printf("\nInserir antes do K !!!!!!\n\n");
-            printf("\nInforme o valor que deseja inserir: \n\n");
+            printf("\nInserir antes do K !!!!!!");
+            printf("\nInforme o valor que deseja inserir: ");
             scanf("%d", &valor);
-            printf("\nInforme o valor em que deseja inserir antes: \n\n");
+            printf("\nInforme o valor em que deseja inserir antes: ");
             scanf("%d", &valorAntes);
             insereAntesDoK(&ponteiroInicio, valor, valorAntes);
 
             break;
         case 7:
-            printf("\nRemove antes do K !!!!!!\n\n");
-            printf("\nInforme o valor em que deseja remover antes: \n\n");
+            printf("\nRemove antes do K !!!!!!");
+            printf("\nInforme o valor em que deseja remover antes: ");
             scanf("%d", &valorAntes);
             removeAntesDoK(&ponteiroInicio, valorAntes);
 
@@ -375,6 +416,7 @@ int main()
             break;
         case 9:
             printf("\nDeixar a lista circular");
+            listaCircular(&ponteiroInicio);
             break;
         case 10:
             imprime(ponteiroInicio);
