@@ -236,6 +236,38 @@ void removeAntesDoK(No **ponteiroInicio, int valorAntes)
     }
 }
 
+void insereOrdenado(No **ponteiroInicio, int valor)
+{
+    No *auxiliar = *ponteiroInicio, *novoNo = malloc(sizeof(No));
+
+    if (novoNo)
+    {
+        novoNo->valor = valor;
+        novoNo->proximo = NULL;
+
+        if (auxiliar == NULL || novoNo->valor < auxiliar->valor)
+        {
+            novoNo->proximo = *ponteiroInicio;
+            *ponteiroInicio = novoNo;
+        }
+        else
+        {
+
+            while ((auxiliar->proximo) && (novoNo->valor > auxiliar->proximo->valor))
+            {
+                auxiliar = auxiliar->proximo;
+            }
+
+            novoNo->proximo = auxiliar->proximo;
+            auxiliar->proximo = novoNo;
+        }
+    }
+    else
+    {
+        printf("Erro ao alocar memoria\n");
+    }
+}
+
 void imprime(No *ponteiroInicio)
 {
 
@@ -261,12 +293,14 @@ int menu()
     printf("\n5 - Buscar valor");
     printf("\n6 - Inserir antes do k (insere no meio) ");
     printf("\n7 - Remove antes do k (remove no meio) ");
-    printf("\n8 - Imprimir  ");
-    printf("\n9- Sair ");
+    printf("\n8 - Insere Ordenado  ");
+    printf("\n9 - Deixar a lista circular: ");
+    printf("\n10 - Imprimir  ");
+    printf("\n11- Sair ");
     printf("\nEscolha uma opcao: ");
     scanf("%d", &opcao);
 
-    while (opcao < 1 && opcao > 9)
+    while (opcao < 1 && opcao > 11)
     {
         printf("\nEscolha uma opcao valida: ");
         scanf("%d", &opcao);
@@ -281,7 +315,7 @@ int main()
     No *ponteiroInicio;
     ponteiroInicio = NULL;
 
-    while (loop != 9)
+    while (loop != 11)
     {
         switch (menu())
         {
@@ -334,11 +368,20 @@ int main()
 
             break;
         case 8:
+            printf("\nInserir Ordenado!!!!!!");
+            printf("\nInfomre o numero que deseja inserir:::");
+            scanf("%d", &valor);
+            insereOrdenado(&ponteiroInicio, valor);
+            break;
+        case 9:
+            printf("\nDeixar a lista circular");
+            break;
+        case 10:
             imprime(ponteiroInicio);
             break;
 
         default:
-            loop = 9;
+            loop = 11;
             break;
         }
     }
