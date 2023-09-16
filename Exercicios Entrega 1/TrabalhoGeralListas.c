@@ -1,10 +1,11 @@
+// Robert Perquim
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 typedef struct No
 {
-
     int valor;
     struct No *proximo;
 
