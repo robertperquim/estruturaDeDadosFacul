@@ -2,10 +2,7 @@
 
 	Sora eu entedi como deveria verificar automaticamente para onde a pessoa deveria ser inserida na fila
 	bastava adicionar na menor fila, para manter o equilibrio.
-
-
-
-
+s
 */
 
 #include <stdio.h>
